@@ -1,8 +1,7 @@
 <p align="center">
-  <img src="assets/logo.png" width="240" />
+  <img src="assets/logo.png" width="440" />
 </p>
 
-<h1 align="center">DocWise</h1>
 
 <p align="center">
 AI-powered prescription management that helps you never miss a dose</p>
