@@ -1,98 +1,205 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+const { width } = Dimensions.get("window");
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <View style={styles.container}>
+      {/* HEADER */}
+      <View style={styles.header}>
+        <View style={styles.profileRow}>
+          <Image
+            source={{ uri: "https://i.pravatar.cc/150?img=47" }}
+            style={styles.avatar}
+          />
+          <View>
+            <Text style={styles.greeting}>Good Morning</Text>
+            <Text style={styles.name}>Emma Stone</Text>
+          </View>
+        </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        <View style={styles.headerActions}>
+          <TouchableOpacity style={styles.scanBtn}>
+            <Ionicons name="scan-outline" size={18} color="#fff" />
+            <Text style={styles.scanText}>Scan</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.iconBtn}>
+            <Ionicons name="sparkles-outline" size={20} />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* DATE */}
+      <Text style={styles.date}>Fri, 26 Dec</Text>
+
+      {/* WEEKLY STATS */}
+      <TouchableOpacity style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>Your Weekly Stats</Text>
+        <Ionicons name="chevron-forward" size={18} />
+      </TouchableOpacity>
+
+      <View style={styles.weekCard}>
+        {["Mon", "Tue", "Wed", "Thr", "Fri", "Sat", "Sun"].map((day, i) => (
+          <View key={i} style={styles.dayItem}>
+            <View style={styles.circle} />
+            <Text style={styles.dayText}>{day}</Text>
+          </View>
+        ))}
+      </View>
+
+      {/* UPCOMING REMINDERS */}
+      <Text style={styles.sectionTitle}>Upcoming Reminders</Text>
+      <View style={styles.card}>
+        <Text style={styles.cardText}>No reminders yet</Text>
+      </View>
+
+      {/* TODAY SUMMARY */}
+      <Text style={styles.sectionTitle}>Today’s Summary</Text>
+      <View style={styles.card}>
+        <Text style={styles.cardText}>
+          You’re all caught up for today
+        </Text>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+    paddingHorizontal: 20,
+    paddingTop: 60,
   },
-  stepContainer: {
-    gap: 8,
+
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  profileRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+
+  avatar: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+  },
+
+  greeting: {
+    color: "#6b7280",
+    fontSize: 13,
+  },
+
+  name: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#111827",
+  },
+
+  headerActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+
+  scanBtn: {
+    flexDirection: "row",
+    backgroundColor: "#4b8f8b",
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    alignItems: "center",
+    gap: 6,
+  },
+
+  scanText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "500",
+  },
+
+  iconBtn: {
+    backgroundColor: "#f3f4f6",
+    padding: 8,
+    borderRadius: 20,
+  },
+
+  date: {
+    marginTop: 20,
+    color: "#6b7280",
+    fontSize: 13,
+  },
+
+  sectionHeader: {
+    marginTop: 18,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#111827",
+    marginTop: 22,
+    marginBottom: 10,
+  },
+
+  weekCard: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
+  },
+
+  dayItem: {
+    alignItems: "center",
+    gap: 6,
+  },
+
+  circle: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    borderWidth: 1.5,
+    borderColor: "#9ca3af",
+  },
+
+  dayText: {
+    fontSize: 12,
+    color: "#6b7280",
+  },
+
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    padding: 24,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+
+  cardText: {
+    color: "#6b7280",
+    fontSize: 14,
   },
 });
