@@ -1,17 +1,23 @@
+import { Ionicons } from "@expo/vector-icons";
+
+import { useRouter } from "expo-router";
 import React from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
   Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+
+
 
 const { width } = Dimensions.get("window");
 
 export default function HomeScreen() {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       {/* HEADER */}
@@ -28,10 +34,13 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.headerActions}>
-          <TouchableOpacity style={styles.scanBtn}>
-            <Ionicons name="scan-outline" size={18} color="#fff" />
-            <Text style={styles.scanText}>Scan</Text>
-          </TouchableOpacity>
+        <TouchableOpacity 
+        style={styles.scanBtn}
+        onPress={() => router.push('/Scancam')}
+      >
+        <Ionicons name="scan-outline" size={18} color="#fff" />
+        <Text style={styles.scanText}>Scan</Text>
+      </TouchableOpacity>
 
           <TouchableOpacity style={styles.iconBtn}>
             <Ionicons name="sparkles-outline" size={20} />

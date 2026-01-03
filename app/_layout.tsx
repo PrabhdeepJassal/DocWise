@@ -5,6 +5,8 @@ export default function RootLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="splash" />
       <Stack.Screen name="login" />
+      <Stack.Screen name="Scancam" />
+      <Stack.Screen name="Docwise-analysis" />
       <Stack.Screen name="(tabs)" />
     </Stack>
   );
